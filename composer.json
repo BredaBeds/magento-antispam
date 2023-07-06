@@ -1,5 +1,5 @@
 {
-    "name": "kreativsoehne/magento2-simple-antispam",
+    "name": "bredabeds/magento-antispam",
     "license": "MIT",
     "type": "magento2-module",
     "version": "1.0.0",
@@ -12,10 +12,7 @@
             "email": "michael@kreativsoehne.de"
         }
     ],
-    "require": {
-        "magento/framework": "^101.0|^102.0",
-        "php": ">=7.0.0"
-    },
+    "require": {},
     "require-dev":{
         "phpunit/phpunit":"*",
         "composer/composer":"*@dev"

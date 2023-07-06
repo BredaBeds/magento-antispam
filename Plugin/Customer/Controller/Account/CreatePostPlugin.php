@@ -17,6 +17,7 @@ class CreatePostPlugin
             "www.",
             ".com",
             ".de",
+            ".cc",
             ".ru",
             ".cn",
             ".net"
@@ -31,7 +32,7 @@ class CreatePostPlugin
 
         foreach ($spamContent as $entry) {
             foreach ($formFieldsToCheck as $field) {
-                if (strpos($data[$field], $entry)) {
+                if (strpos($data[$field], $entry) !== false) {
                     $spam = true;				
                 }
             }
