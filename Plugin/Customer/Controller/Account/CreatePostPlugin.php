@@ -32,6 +32,9 @@ class CreatePostPlugin
 
         foreach ($spamContent as $entry) {
             foreach ($formFieldsToCheck as $field) {
+                if (is_null($data[$field])) { //ooedit: added this to prevent deprecation error
+                    continue; //ooedit
+                } //ooedit
                 if (strpos($data[$field], $entry) !== false) {
                     $spam = true;				
                 }
