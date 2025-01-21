@@ -1,10 +1,9 @@
 {
-    "name": "bredabeds/magento-antispam",
+    "name": "bredabeds/magento2-simple-antispam",
     "license": "MIT",
     "type": "magento2-module",
-    "version": "1.0.0",
-    "homepage": "https://www.kreativundsoehne.de/",
-    "description": "A Magento 2 extension for blocking (russian) spam bots creating new customer accounts",
+    "version": "2.0.0",
+    "description": "A Magento 2 extension for blocking spam bots creating new customer accounts",
     "keywords":[ "composer-installer", "magento", "magento 2", "spam", "antispam"],
     "authors": [
         {
@@ -12,14 +11,16 @@
             "email": "michael@kreativsoehne.de"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "^8.1"
+    },
     "require-dev":{
         "phpunit/phpunit":"*",
         "composer/composer":"*@dev"
     },
     "autoload": {
       "psr-4": {
-        "KuS\\Antispam\\": ""
+        "BredaBeds\\Antispam\\": ""
       },
       "files": [
             "registration.php"

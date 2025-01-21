@@ -1,46 +1,25 @@
 # magento-2-simple-antispam
-A customizeable and simple Magento 2 extension for blocking (russian) spam bots creating new customer accounts.
+A customizeable and simple Magento 2 extension for blocking spam bots creating new customer accounts. Forked from `https://github.com/kreativsoehne/magento-2-simple-antispam`, modernized for PHP 8 and Magento 2.4.x compatible.
 
-## installation
-    1. $ composer require kreativsoehne/magento2-simple-antispam
-    2. $ ./bin/magento module:enable KuS_Antispam
-    3. $ ./bin/magento setup:upgrade
-	4. $ ./bin/magento setup:di:compile
-    5. Profit.
+## Installation
+    composer require bredabeds/magento2-simple-antispam
+    bin/magento module:enable BredaBeds_Antispam
+    bin/magento setup:upgrade
+	bin/magento setup:di:compile
 
-## usage
+## Usage
 This extension is very simple. By default it won't perform a registration request when some registration fields contain special strings on a blacklist:
 
-    $spamContent = array(
-        "http://",
-        "https://",
-        "www.",
-        ".com",
-        ".de",
-        ".ru",
-        ".cn",
-        ".net"
-    );
-
-default registration fields:
-
-    $formFieldsToCheck = array(
-        'firstname',
-        'lastname'
-    );
-
+    $patterns = [
+        '/https?:\/\//i', // Matches http/https
+        '/www\./i',       // Matches 'www.'
+        '/\.(com|net|us|de|cc|ru|cn|info|biz|xyz|top|pw|tk|ga|ml|cf|gq|ph|vn|in|ro|ua|pk|ng)\b/i', // Matches common TLDs
+    ];
 
 You can change the whole extension behaviour by your need. Just edit this file:
 
-    ./Plugin/Customer/Controller/Account/CreatePostPlugin.php
+    ./Plugin/Customer/Account/CreatePostPlugin.php
 
-## how it works
-It's a simple interceptor plugin which wraps the \Magento\Customer\Controller\Account\CreatePost::Execute() method into an around method.
+## How it works
+It's a simple interceptor plugin which taps the \Magento\Customer\Controller\Account\CreatePost::Execute() method into an before method.
 It will serach all specified form fields for the spam content by a simple iteration. The original Execute() method will only be called if there was no spam string detected.
-
-## Notice:
-This Extension is meant to be used as a skeleton by developers. It is very primitive and may need customization.
-When installing via Composer, further upgrades will eliminiate your customizations. Make sure to write an interceptor plugin by yourself, don't upgrade or use it as a local extension in the /app/code/ folder.
-
-Propably there will be a future version, capable of defining blacklisted strings and form fields via Magento Admin when there's a demand for it. Just let us know or make the neccesary changey by yourself and leave a pull request.
-We're happy about every contribution :)
