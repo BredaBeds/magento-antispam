@@ -37,7 +37,7 @@ class CreatePostPlugin
                     __('Invalid input detected in the name fields. Please remove URLs or inappropriate text.')
                 );
                 $url = $this->urlModel->getUrl('*/*/create', ['_secure' => true]);
-                throw new InputException(__('Invalid name input.'));
+                throw new InputException(__('Invalid name input, suspected spam.'));
             }
 
         }
